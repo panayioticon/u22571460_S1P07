@@ -1,0 +1,39 @@
+﻿@model List<u22571460_S1P07.Models.Publication>
+
+@{
+    ViewBag.Title = "Publications";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-5">
+    <h2 class="mb-4">Publications</h2>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var pub in Model)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <img src="@pub.Image" class="card-img-top" />
+                        <p class="card-title">@pub.GetTypeName()</p>
+                        <p class="card-subtitle mb-2 ps-2">@pub.Title</p>
+                        <p class="card-text">by @pub.Author.Name</p>
+                        <p class="card-text">@pub.Summary</p>
+                        <a href="@pub.Link" target="_blank" class="btn text-primary text-decoration-none">Read more</a>
+                        @if (pub is u22571460_S1P07.Models.Article article)
+                        {
+                            <p class="card-text">The date of publication is @article.GetPublicationDate()</p>
+                        }
+                        @if (pub is u22571460_S1P07.Models.Book book)
+                        {
+                            <p class="card-text">First publication date is @book.GetPublicationDate() and the number of editions is @book.GetEditionInfo()</p>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+         }
+    </div>
+</div>
